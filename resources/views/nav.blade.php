@@ -32,6 +32,7 @@
           .sidebar h2{
             color: #ECF0F1; /* putih lembut */
             text-align: center;
+            margin-top: 40px;
             margin-bottom: 30px;
             letter-spacing: 1px;
           }
@@ -66,6 +67,7 @@
           /* Konten Utama */
           .main-content{
             margin-left: 240px;
+            margin-top: 30px;
             padding: 40px;
             flex: 1;
           }
@@ -81,28 +83,29 @@
     </style>
 </head>
 <body>
+    {{-- sidebar --}}
     <div class="sidebar">
         <h2><i class="fa-solid fa-store"></i>MyShop</h2>
+        {{-- list --}}
         <ul>
             <li><a href=""><i class="fa-solid fa-house"></i>Beranda</a></li>
             <li><a href=""><i class="fa-solid fa-box"></i>Produk</a></li>
             <li><a href=""><i class="fa-solid fa-list"></i>Kategori</a></li>
-            <li><a href=""><i class="fa-solid fa-house"></i>Pesanan</a></li>
-            <li><a href=""><i class="fa-solid fa-house"></i>Pelanggan</a></li>
-            <li><a href=""><i class="fa-solid fa-house"></i>Pengaturan</a></li>
-            <li><a href=""><i class="fa-solid fa-house"></i>Logout</a></li>
+            <li><a href=""><i class="fa-solid fa-shop"></i>Toko</a></li>
+            <li><a href=""><i class="fa-solid fa-image"></i>Gambar</a></li>
+            <li><a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
         </ul>
     </div>
     <div class="sidebar-footer">
          © 2025 MyShop
     </div>
 
-    <div class="main-content">
+    {{-- <div class="main-content">
         <h1>
             Dashboard Toko Online
             <p>Selamat datang di area admin toko online Anda. Kelola produk, pesanan, pelanggan, dan promo dengan mudah di sini.</p>
         </h1>
-    </div>
+    </div> --}}
     @yield('sidebar')
 </body>
 </html>
