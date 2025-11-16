@@ -110,6 +110,16 @@
           .dataTables_wrapper .dataTables_paginate {
             margin-top: 15px;
           }
+          .btn-custom-dark{
+            background-color: #2C3E50 !important; /*warna biru latar belakang button*/
+            border-color: #2C3E50 !important; /*warna biru yang sama dengan latar belakang*/
+            color: #ECF0F1; /*warna putih untuk teks*/
+          }
+          .bt{
+            background-color: #2C3E50 !important; /* warna biru*/
+            border-color: #2C3E50 !important;
+            color: #ECF0F1;
+          }
 
     </style>
 </head>
@@ -121,9 +131,9 @@
         <ul>
             <li><a href=""><i class="fa-solid fa-house"></i>Beranda</a></li>
             <li><a href="/pro"><i class="fa-solid fa-box"></i>Produk</a></li>
-            <li><a href=""><i class="fa-solid fa-list"></i>Kategori</a></li>
-            <li><a href=""><i class="fa-solid fa-shop"></i>Toko</a></li>
-            <li><a href=""><i class="fa-solid fa-image"></i>Gambar</a></li>
+            <li><a href="/kate"><i class="fa-solid fa-list"></i>Kategori</a></li>
+            <li><a href="/toko"><i class="fa-solid fa-shop"></i>Toko</a></li>
+            <li><a href="/gam"><i class="fa-solid fa-image"></i>Gambar</a></li>
             <li><a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
         </ul>
     </div>

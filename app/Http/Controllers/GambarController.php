@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class GambarController extends Controller
 {
-    //
+    public function index(){
+        return view('gambar');
+    }
 }

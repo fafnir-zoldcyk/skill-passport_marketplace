@@ -1,12 +1,31 @@
 <?php
 
+use App\Http\Controllers\GambarController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\TokoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admin',[UserController::class,'index']);
+//User
+Route::get('/user',[UserController::class,'index']);
 
+//Produk
 Route::get('/pro',[ProdukController::class,'index']);
+
+//Toko
+Route::get('/toko',[TokoController::class,'index'])->name('toko');
+Route::get('/ctr',[TokoController::class,'create'])->name('create-toko');
+Route::post('str',[TokoController::class,'store'])->name('store-toko');
+Route::get('/edtoko',[TokoController::class,'edit'])->name('edit-toko');
+Route::post('/uptoko',[TokoController::class,'update'])->name('update-toko');
+
+//Kategori
+Route::get('/kate',[KategoriController::class,'index'])->name('kategori');
+
+//Gambar
+Route::get('/gam',[GambarController::class,'index'])->name('gambar');
+

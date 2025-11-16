@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tokos', function (Blueprint $table) {
             $table->id();
             $table->string('nama_toko');
-            $table->text('deksripsi');
+            $table->text('deskripsi');
             $table->string('gambar');
             $table->foreignId('users_id')->references('id')->on('users');
             $table->string('kontak_toko');
