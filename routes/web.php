@@ -14,7 +14,8 @@ Route::get('/', function () {
 Route::get('/user',[UserController::class,'index']);
 
 //Produk
-Route::get('/pro',[ProdukController::class,'index']);
+Route::get('/pro',[ProdukController::class,'index'])->name('produk');
+Route::post('/stopro',[ProdukController::class,'store'])->name('store-produk');
 
 //Toko
 Route::get('/toko',[TokoController::class,'index'])->name('toko');
@@ -25,6 +26,9 @@ Route::delete('/toko/{id}',[TokoController::class,'destroy'])->name('hapus-toko'
 
 //Kategori
 Route::get('/kate',[KategoriController::class,'index'])->name('kategori');
+Route::post('/strkate',[KategoriController::class,'store'])->name('store-kategori');
+Route::put('/upkate/{id}',[KategoriController::class,'update'])->name('update-kategori');
+Route::delete('/kate/{id}',[KategoriController::class,'delete'])->name('hapus-kategori');
 
 //Gambar
 Route::get('/gam',[GambarController::class,'index'])->name('gambar');

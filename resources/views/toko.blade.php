@@ -35,8 +35,8 @@
                     <td>{{$item->kontak_toko}}</td>
                     <td>{{$item->alamat}}</td>
                     <td>
-                        <button type="button" class="btn btn-custom-dark me-2" data-bs-toggle="modal" data-bs-target="#editModal{{$item->id}}"><i class="fa-solid fa-pen-to-square text-white"></i></button>
-                        <button type="button" class="btn btn-custom-dark" data-bs-toggle="modal" data-bs-target="#hapusModal{{$item->id}}"><i class="fa-solid fa-trash-can text-white"></i></button>
+                        <button type="button" class="btn btn-custom-dark me-2" data-bs-toggle="modal" data-bs-target="#editModal{{$item->id}}"><i class="fa-solid fa-pen-to-square "></i></button>
+                        <button type="button" class="btn btn-custom-dark" data-bs-toggle="modal" data-bs-target="#hapusModal{{$item->id}}"><i class="fa-solid fa-trash-can "></i></button>
                     </td>
                 </tr>
                 {{-- MODAL EDIT PER ITEM --}}

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama');
             $table->integer('harga');
             $table->integer('stock');
+            $table->string('gambar');
             $table->text('deskripsi');
             $table->date('tanggal_upload');
             $table->foreignId('id_toko')->references('id')->on('tokos');
