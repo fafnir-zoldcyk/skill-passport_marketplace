@@ -20,8 +20,8 @@ Route::get('/pro',[ProdukController::class,'index']);
 Route::get('/toko',[TokoController::class,'index'])->name('toko');
 Route::get('/ctr',[TokoController::class,'create'])->name('create-toko');
 Route::post('str',[TokoController::class,'store'])->name('store-toko');
-Route::get('/edtoko',[TokoController::class,'edit'])->name('edit-toko');
-Route::post('/uptoko',[TokoController::class,'update'])->name('update-toko');
+Route::put('/uptoko/{id}',[TokoController::class,'update'])->name('update-toko');
+Route::delete('/toko/{id}',[TokoController::class,'destroy'])->name('hapus-toko');
 
 //Kategori
 Route::get('/kate',[KategoriController::class,'index'])->name('kategori');

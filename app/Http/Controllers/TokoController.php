@@ -14,8 +14,8 @@ class TokoController extends Controller
     public function index()
     {
         //
-        $tokos = Toko::all();
-        return view('toko', compact('tokos'));
+        $data['toko'] = Toko::all();
+        return view('toko',$data );
     }
 
     /**
@@ -94,14 +94,17 @@ class TokoController extends Controller
         $toko = Toko::findOrFail($id);
 
         // kalau ada gambar baru diupload
-         if ($request->hasFile('foto')) {
-            $gambar = time() . '.' . $request->gambar->extension();
-            $request->foto->move(public_path('asset/image'), $gambar);
-            $toko->gambar = $gambar;
+        if ($request->hasFile('gambar')) {
+        $gambar   = $request->file('gambar');
+        $filename = time() . '-' . $request->nama_toko . '.' . $gambar->getClientOriginalExtension();
+        $gambar->storeAs('gambar', $filename, 'public');
+        } else {
+        $filename = null;
         }
 
         $toko->nama_toko = $request->nama_toko;
         $toko->deskripsi = $request->deskripsi;
+        $toko->gambar = $filename;
         $toko->kontak_toko = $request->kontak_toko;
         $toko->alamat = $request->alamat;
         $toko->save();
@@ -117,6 +120,6 @@ class TokoController extends Controller
         //
         $toko = Toko::findOrFail($id);
         $toko->delete();
-        return redirect()->route('admin.toko.index')->with('success', 'Toko berhasil dihapus.');
+        return redirect()->route('toko')->with('success', 'Toko berhasil dihapus.');
     }
 }
