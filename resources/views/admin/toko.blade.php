@@ -1,6 +1,10 @@
-@extends('nav')
+@extends('admin.nav')
 @section('sidebar')
 <div class="main-content">
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
     <div class="d-flex justify-content-between align-items-center">
         <h2 class="fw-bold mb-0 text-dark pb-2">Data Toko</h2>
 
@@ -99,14 +103,14 @@
                             @csrf
                             @method('DELETE')
                         <div class="modal-content">
-                            <div class="modal-header"><h5>Hapus Toko</h5></h5></div>
+                            <div class="modal-header"><h5>Hapus Toko {{ $item->nama_toko }}</h5></h5></div>
                             <div class="modal-body">
-                                <p>Apakah Anda Yakin Ingin Menghapus Toko Ini?</p>
+                                <p>Apakah Anda Yakin Ingin Menghapus {{ $item->nama_toko }} Ini?</p>
                                 <input type="hidden" name="hapusid" value="{{$item->id}}">
                             </div>
                             <div class="modal-footer">
-                                <button id="konfirmhapus" class="btn btn-dark">Hapus</button>
-                                <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" id="konfirmhapus" class="btn btn-dark">Hapus</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             </div>
                         </div>
                         </form>
@@ -158,12 +162,4 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function(){
-        $('#Table').DataTable({
-            responsive: true,
-            pageLenght: 4,
-        })
-    })
-</script>
 @endsection

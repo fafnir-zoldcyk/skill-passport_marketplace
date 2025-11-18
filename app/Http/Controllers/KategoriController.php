@@ -9,7 +9,7 @@ class KategoriController extends Controller
 {
     public function index(){
         $data['kategori'] = Kategori::all();
-        return view('kategori',$data);
+        return view('admin.kategori',$data);
     }
     public function store(Request $request){
         $request->validate([

@@ -1,6 +1,33 @@
-@extends('nav')
+@extends('admin.nav')
 @section('sidebar')
+<style>
+#myTable td:last-child {
+    /* Mengatur Lebar kolom  */
+    width: 300px;
+    min-width: 300px;
+
+    /* Agar tombol rapi */
+    text-align: center;
+
+    /* Agar tombol tidak pindah baris */
+    white-space: nowrap;
+}
+
+#myTable th:first-child,
+#myTable td:first-child {
+    width: 45px; /* Lebar kolom # */
+    text-align: center;
+}
+
+#myTable.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f7f7f7; /* Warna striping yang lebih lembut */
+}
+</style>
 <div class="main-content">
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
     <div class="d-flex justify-content-between align-items-center">
         <h2 class="fw-bold mb-0 text-dark pb-2">Data Kategori</h2>
         <button type="button" class="btn btn-custom-dark me-2" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah <i class="fas fa-plus"></i></button>
@@ -14,16 +41,14 @@
             <th>Aksi</th>
     </thead>
     <tbody>
-        <tr>
-         @foreach ($kategori as $item)
+        @foreach ($kategori as $item)
          <tr>
             <td>{{ $item->id }}</td>
             <td>{{$item->nama_kategori}}</td>
             <td>
-                <button type="button" class="btn btn-custom-dark me-2" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}"><i class="fas fa-pen-to-square"></i></button>
+                <button type="button" class="btn btn-custom-dark" data-bs-toggle="modal" data-bs-target="#editModal{{ $item->id }}"><i class="fas fa-pen-to-square"></i></button>
                 <button type="button" class="btn btn-custom-dark" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $item->id }}"><i class="fas fa-trash-can"></i></button>
             </td>
-         </tr>
          {{-- Edit Kategori(modal) --}}
          <div class="modal fade" id="editModal{{ $item->id }}">
             <div class="modal-dialog">
@@ -59,8 +84,8 @@
                         <input type="hidden" name="hapusid" value="{{ $item->id }}">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-custom-dark me-2">Simpan</button>
-                        <button type="button" class="btn btn-custom-dark" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-custom-dark me-2">Hapus</button>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Batal</button>
                     </div>
                 </div>
             </form>
@@ -92,19 +117,5 @@
         </div>
     </div>
 </div>
-<script>
-$(document).ready(function() {
-    $('#myTable').DataTable({
-        responsive: true,    // tabel responsive di HP
-        pageLength: 5,       // jumlah baris per halaman
-        language: {
-            search: "Cari:",
-            lengthMenu: "Tampilkan _MENU_ baris",
-            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data"
-        },
-        // aktifkan tema boostrap
-        dom: '<"top"f>rt<"bottom"lip><"clear">'
-    });
-});
-</script>
+
 @endsection

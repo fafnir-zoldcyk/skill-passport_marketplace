@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'nama' => 'dian',
-            'toko' => 'Bshop',
-            'username' => 'dain1',
-            'password' => bcrypt('123456'),
+            'nama' => 'fanrir',
+            'kontak' => '0845677654',
+            'username' => 'fafnir',
+            'password' => bcrypt('123'),
             'role' => 'Admin'
         ]);
 
-        
+
     }
 }

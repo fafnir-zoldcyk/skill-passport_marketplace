@@ -1,6 +1,10 @@
-@extends('nav')
+@extends('admin.nav')
 @section('sidebar')
 <div class="main-content">
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
 <h2 class="fw-bold mb-4 text-dark border-bottom pb-2"> 🖼️Data Gambar</h2>
     <table id="myTable" class="table table-striped table-bordered align-middle shadow-sm rounded-3 bg-white">
     <thead class="table-dark">
@@ -25,19 +29,4 @@
     </tbody>
 </table>
 </div>
-<script>
-$(document).ready(function() {
-    $('#myTable').DataTable({
-        responsive: true,    // tabel responsive di HP
-        pageLength: 5,       // jumlah baris per halaman
-        language: {
-            search: "Cari:",
-            lengthMenu: "Tampilkan _MENU_ baris",
-            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data"
-        },
-        // aktifkan tema boostrap
-        dom: '<"top"f>rt<"bottom"lip><"clear">'
-    });
-});
-</script>
 @endsection

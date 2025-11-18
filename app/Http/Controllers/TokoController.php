@@ -15,7 +15,7 @@ class TokoController extends Controller
     {
         //
         $data['toko'] = Toko::all();
-        return view('toko',$data );
+        return view('admin.toko',$data );
     }
 
     /**
@@ -42,7 +42,7 @@ class TokoController extends Controller
 
         if ($request->hasFile('gambar')) {
         $gambar   = $request->file('gambar');
-        $filename = time() . '-' . $request->judul . '.' . $gambar->getClientOriginalExtension();
+        $filename = time() . '-' . $request->nama_toko . '.' . $gambar->getClientOriginalExtension();
         $gambar->storeAs('gambar', $filename, 'public');
         } else {
         $filename = null;

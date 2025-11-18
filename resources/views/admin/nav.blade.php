@@ -131,16 +131,16 @@
 <body>
     {{-- sidebar --}}
     <div class="sidebar">
-        <h2><i class="fa-solid fa-store"></i>MyShop</h2>
+        <h2><i class="fa-solid fa-store"></i>Fstore</h2>
         {{-- list --}}
         <ul>
-            <li><a href=""><i class="fa-solid fa-house"></i>Beranda</a></li>
+            <li><a href="/admin"><i class="fa-solid fa-house"></i>Beranda</a></li>
             <li><a href="/user"><i class="fa-solid fa-user"></i>User</a></li>
             <li><a href="/toko"><i class="fa-solid fa-shop"></i>Toko</a></li>
             <li><a href="/pro"><i class="fa-solid fa-box"></i>Produk</a></li>
             <li><a href="/kate"><i class="fa-solid fa-list"></i>Kategori</a></li>
             <li><a href="/gam"><i class="fa-solid fa-image"></i>Gambar</a></li>
-            <li><a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+            <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
         </ul>
     </div>
     <div class="sidebar-footer">
@@ -155,4 +155,19 @@
     </div> --}}
     @yield('sidebar')
 </body>
+<script>
+$(document).ready(function() {
+    $('#myTable').DataTable({
+        responsive: true,    // tabel responsive di HP
+        pageLength: 5,       // jumlah baris per halaman
+        language: {
+            search: "Cari:",
+            lengthMenu: "Tampilkan _MENU_ baris",
+            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data"
+        },
+        // aktifkan tema boostrap
+        dom: '<"top"f>rt<"bottom"lip><"clear">'
+    });
+});
+</script>
 </html>
