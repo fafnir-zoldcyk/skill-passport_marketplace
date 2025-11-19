@@ -15,6 +15,10 @@ class ProdukController extends Controller
         $data['toko'] = Toko::all();
         return view('admin.produk',$data);
     }
+    public function view(){
+        $data['produk'] = Produk::all();
+        return view('produk',$data);
+    }
     public function store(Request $request){
         $request->validate([
             'nama' => 'required|string|max:100',

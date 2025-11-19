@@ -11,6 +11,10 @@ class KategoriController extends Controller
         $data['kategori'] = Kategori::all();
         return view('admin.kategori',$data);
     }
+    public function view(){
+        $data['kategori'] = Kategori::all();
+        return view('kategori',$data);
+    }
     public function store(Request $request){
         $request->validate([
             'nama_kategori' => 'required|string|max:100',

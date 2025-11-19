@@ -15,6 +15,9 @@ Route::post('/login/auth',[UserController::class,'auth'])->name('login.auth');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 Route::get('/regis',[UserController::class,'regis'])->name('register');
 Route::post('/register',[UserController::class,'register'])->name('regiter-store');
+Route::get('/beranda',[UserController::class,'beranda'])->name('beranda');
+Route::get('/produk',[ProdukController::class,'view'])->name('produk-view');
+Route::get('/kategori',[KategoriController::class,'view'])->name('kategori-view');
 Route::middleware(['member'])->group(function () {
     Route::get('/member',[UserController::class,'member'])->name('member');
 });

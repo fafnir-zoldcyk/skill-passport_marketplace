@@ -1,6 +1,9 @@
 @extends('member.nav')
 @section('sidebar')
 <div class="main-content">
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
     <h2 class="fw-bold mb-4 text-dark border-bottom pb-2">Dashboard</h2>
     <div class="row mb-3 g-3 justify-content-center align-items-center">
         <div class="col-md-3">

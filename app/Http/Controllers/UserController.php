@@ -29,6 +29,11 @@ class UserController extends Controller
         $data['totalstock'] = Produk::where('stock','>',0)->count();
         return view('member.member',$data);
     }
+    public function beranda(){
+        $data['kategori'] = Kategori::all();
+        $data['produk'] = Produk::all();
+        return view('beranda',$data);
+    }
     public function regis(){
         return view('register');
     }
