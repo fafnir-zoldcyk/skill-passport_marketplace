@@ -219,15 +219,17 @@
                     <i class="fas fa-shopping-cart"></i>
                 </a> --}}
 
+                @if (Auth::check())
                 <!-- User -->
-                <a href="{{ route('user') }}" class="nav-icon">
-                    <i class="fas fa-user"></i>
+                <a href="{{ route('member') }}" class="nav-icon">
+                    <i class="fas fa-user me-2"></i>
                 </a>
-
-                <!-- Logout -->
-                <a href="{{ route('logout') }}" class="nav-icon">
-                    <i class="fas fa-right-from-bracket"></i>
-                </a>
+                {{-- Jika sudah login, silahkan logout --}}
+                    <a href="{{ route('logout') }}"class="btn btn-login ms-2">
+                        <i class="fas fa-right-from-bracket"></i>
+                    </a>
+                @else<a class="btn btn-login ms-2" href="{{ route('login') }}">Login</a>
+                @endif
             </div>
         </div>
     </div>
@@ -246,19 +248,6 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('toko') }}">Toko</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('produk-view') }}">Produk</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('kategori-view') }}">Kategori</a></li>
-                @if (Auth::check())
-                <li class="nav-item d-flex align-items-center"><a class="btn btn-login ms-2" href="{{ route('login') }}">Login</a></li>
-                @else
-                {{-- Jika sudah login, silahkan logout --}}
-                <li class="nav-item d-flex align-items-center">
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
-                        <i class="fas fa-solid-right-from-bracket"></i>
-                    </a>
-                    <form action="{{ route('logout') }}" id="logout-form" method="post" class="d-none">
-                        @csrf
-                    </form>
-                </li>
-                @endif
             </ul>
         </div>
     </div>

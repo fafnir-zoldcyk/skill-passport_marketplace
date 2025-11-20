@@ -1,4 +1,4 @@
-@extends('land')
+@extends('clients.land')
 @section('navbar')
 <div class="container my-5">
     <h3 class="fw-bold mb-4 text-center">Produk Terbaru</h3>

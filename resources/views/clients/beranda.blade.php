@@ -1,4 +1,4 @@
-@extends('land')
+@extends('clients.land')
 @section('navbar')
 <style>
     .carousel-caption-left{
@@ -12,6 +12,12 @@
         color: #ffffff;
         font-size: 3rem;
         font-weight: 700;
+    }
+    .carousel-caption-left h1.carousel-title {
+    color: #000 !important;
+    }
+    .carousel-caption-left p.carousel-title {
+    color: #000 !important;
     }
     .carousel-caption-left p{
         color: #e5e5e5;
@@ -48,7 +54,25 @@
     .carousel-control-next {
         right: 5px;
     }
+    .carousel-item {
+    position: relative;
+    overflow: hidden;
+    }
+    .carousel-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(28, 27, 85, 0.25); /* Ubah opacity sesuai kebutuhan (0.1 - 0.5) */
+        z-index: 1;
+    }
 
+    .carousel-caption-left {
+        position: absolute;
+        z-index: 2; /* pastikan teks di depan overlay */
+    }
 
 </style>
 <div class="container-fluid p-0">
@@ -70,14 +94,14 @@
             <div class="carousel-item">
                 <img src="{{ asset('asset/image/ice-falling-brown-drink.jpg') }}" class="d-block w-100"style="height: 650px; object-fit: cover" alt="...">
                 <div class="carousel-caption-left">
-                    <h1>Fstore</h1>
-                    <p>Membantu Anda menemukan berbagai produk yang anda cari</p>
+                    <h1 class="carousel-title">Fstore</h1>
+                    <p class="carousel-title">Membantu Anda menemukan berbagai produk yang anda cari</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="{{ asset('asset/image/black-notebook-with-pen.jpg') }}" class="d-block w-100" style="height: 650px; object-fit: cover" alt="...">
                 <div class="carousel-caption-left">
-                    <h1>Fstore</h1>
+                    <h1 >Fstore</h1>
                     <p>Jelajahi berbagai produk berkualitas di Fstore!</p>
                 </div>
             </div>
@@ -107,23 +131,23 @@
                 <div class="p-3 category-item">
                     <button class="kategori-btn mt-2">
                         <i class="fas fa-utensils"></i>
-                        <span>Elektronik</span>
+                        <span>Makanan</span>
                         </button>
                 </div>
             </div>
             <div class="col-6 col-md-4 col-lg-4">
                 <div class="p-3 category-item">
                     <button class="kategori-btn mt-2">
-                    <i class="fas fa-bolt-lightning"></i>
-                        <span>Elektronik</span>
+                    <i class="fas fa-bottle-droplet"></i>
+                        <span>Minuman</span>
                     </button>
                 </div>
             </div>
             <div class="col-6 col-md-4 col-lg-4">
                 <div class="p-3 category-item">
                     <button class="kategori-btn mt-2">
-                    <i class="fas fa-bolt-lightning"></i>
-                        <span>Elektronik</span>
+                    <i class="fas fa-pen-fancy"></i>
+                        <span>Alat Tulis</span>
                     </button>
                 </div>
             </div>

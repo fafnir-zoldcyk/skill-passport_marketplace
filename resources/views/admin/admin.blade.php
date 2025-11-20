@@ -2,7 +2,7 @@
 
 @section('sidebar')
 <div class="main-content">
-    <h2 class="fw-bold mb-4 text-dark border-bottom pb-2">Dashboard</h2>
+    <h2 class="fw-bold mb-4 text-dark border-bottom pb-2">Dashboard Ujang Ujang Ujang</h2>
     <div class="row mb-3 g-3 justify-content-center align-items-center">
         <div class="col-md-3">
             <div class="card text-white btn-custom-dark p-3">

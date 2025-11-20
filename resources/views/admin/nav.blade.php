@@ -9,15 +9,16 @@
 <link rel="stylesheet" href="{{asset('bootstrap-5.3.8-dist/css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
 
+{{-- Modal --}}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- jQuery dan DataTables -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
-{{-- Modal --}}
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
@@ -120,6 +121,12 @@
             border-color: #2C3E50 !important; /*warna biru yang sama dengan latar belakang*/
             color: #ECF0F1; /*warna putih untuk teks*/
           }
+          .btn-custom-dark:hover{
+            background-color: #d6d6d6 !important; /*warna biru lebih gelap saat hover*/
+            border-color: #d6d6d6 !important;
+            transition: 0.3s;
+            color: #2C3E50;
+          }
           .bt{
             background-color: #2C3E50 !important; /* warna biru*/
             border-color: #2C3E50 !important;
@@ -154,20 +161,20 @@
         </h1>
     </div> --}}
     @yield('sidebar')
-</body>
-<script>
-$(document).ready(function() {
-    $('#myTable').DataTable({
-        responsive: true,    // tabel responsive di HP
-        pageLength: 5,       // jumlah baris per halaman
-        language: {
-            search: "Cari:",
-            lengthMenu: "Tampilkan _MENU_ baris",
-            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data"
-        },
-        // aktifkan tema boostrap
-        dom: '<"top"f>rt<"bottom"lip><"clear">'
+    <script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            responsive: true,    // tabel responsive di HP
+            pageLength: 5,       // jumlah baris per halaman
+            language: {
+                search: "Cari:",
+                lengthMenu: "Tampilkan _MENU_ baris",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data"
+            },
+            // aktifkan tema boostrap
+            dom: 'frtip'
+        });
     });
-});
-</script>
+    </script>
+</body>
 </html>

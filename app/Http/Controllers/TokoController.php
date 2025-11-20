@@ -3,32 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Toko;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TokoController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-        $data['toko'] = Toko::all();
-        return view('admin.toko',$data );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-        return view('create-toko');
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Menambahkan sesudah create Toko
      */
     public function store(Request $request)
     {
@@ -52,30 +34,13 @@ class TokoController extends Controller
             'nama_toko' => $request->nama_toko,
             'deskripsi' => $request->deskripsi,
             'gambar' => $filename,
+            'status' =>'active',
             'kontak_toko' => $request->kontak_toko,
             'alamat' => $request->alamat,
-            'users_id' => 1, // atau Auth::id() jika sudah login
+            'users_id' => $request->users_id, // atau Auth::id() jika sudah login
         ]);
 
         return redirect()->route('toko')->with('success', 'Toko berhasil ditambahkan.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    // public function show(Toko $toko)
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Toko $toko, $id)
-    {
-        //
-        $data['toko'] = Toko::all();
-        return view('edit-toko', $data);
     }
 
     /**
@@ -107,13 +72,14 @@ class TokoController extends Controller
         $toko->gambar = $filename;
         $toko->kontak_toko = $request->kontak_toko;
         $toko->alamat = $request->alamat;
+        $toko->users_id = $request->users_id;
         $toko->save();
 
         return redirect()->route('toko')->with('success', 'Toko berhasil diperbarui.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Hapus Toko
      */
     public function destroy($id)
     {
@@ -121,5 +87,11 @@ class TokoController extends Controller
         $toko = Toko::findOrFail($id);
         $toko->delete();
         return redirect()->route('toko')->with('success', 'Toko berhasil dihapus.');
+    }
+    public function approve($id){
+        $toko = Toko::findOrFail($id);
+        $toko->status = 'active';
+        $toko->save();
+        return redirect()->route('toko')->with('success', 'Toko berhasil diapprove.');
     }
 }

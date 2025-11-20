@@ -134,12 +134,12 @@
         <h2><i class="fa-solid fa-user"></i>Member</h2>
         {{-- list --}}
         <ul>
-            <li><a href="/admin"><i class="fa-solid fa-house"></i>Beranda</a></li>
-            <li><a href="/user"><i class="fa-solid fa-user"></i>User</a></li>
-            <li><a href="/toko"><i class="fa-solid fa-shop"></i>Toko</a></li>
-            <li><a href="/pro"><i class="fa-solid fa-box"></i>Produk</a></li>
+            <li><a href="/member"><i class="fa-solid fa-house"></i>Beranda</a></li>
+            {{-- <li><a href="/use"><i class="fa-solid fa-user"></i>Profile</a></li> --}}
+            <li><a href="/tok"><i class="fa-solid fa-shop"></i>Toko</a></li>
+            <li><a href="/prod"><i class="fa-solid fa-box"></i>Produk</a></li>
             {{-- <li><a href="/kate"><i class="fa-solid fa-list"></i>Kategori</a></li> --}}
-            <li><a href="/gam"><i class="fa-solid fa-image"></i>Gambar</a></li>
+            {{-- <li><a href="/gambar"><i class="fa-solid fa-image"></i>Gambar</a></li> --}}
             <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
         </ul>
     </div>

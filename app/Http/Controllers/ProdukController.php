@@ -9,16 +9,12 @@ use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
-    public function index(){
-        $data['produk'] = Produk::all();
-        $data['kategori'] = Kategori::all();
-        $data['toko'] = Toko::all();
-        return view('admin.produk',$data);
-    }
+
     public function view(){
         $data['produk'] = Produk::all();
-        return view('produk',$data);
+        return view('clients.produk',$data);
     }
+    
     public function store(Request $request){
         $request->validate([
             'nama' => 'required|string|max:100',
@@ -50,7 +46,7 @@ class ProdukController extends Controller
             'id_toko' => $request->id_toko,
         ]);
 
-        return redirect()->route('produk')->with('success', 'Produk berhasil ditambahkan.');
+        return redirect()->route('member-produk')->with('success', 'Produk berhasil ditambahkan.');
     }
     public function update(Request $request, String $id){
         $request->validate([
@@ -86,6 +82,11 @@ class ProdukController extends Controller
         return redirect()->back()->with('success', 'Produk berhasil diupdate.');
     }
     public function delete(String $id) {
+        $produk = Produk::findOrFail($id);
+        $produk->delete();
+        return redirect()->back()->with('success','Produk berhasil di hapus');
+    }
+    public function hapus(String $id) {
         $produk = Produk::findOrFail($id);
         $produk->delete();
         return redirect()->back()->with('success','Produk berhasil di hapus');

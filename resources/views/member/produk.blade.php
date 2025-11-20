@@ -1,9 +1,5 @@
-@extends('admin.nav')
+@extends('member.nav')
 @section('sidebar')
-{{-- {-- Modal --}}
-{{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> --}}
-
 <div class="main-content">
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -11,7 +7,7 @@
 
     <div class="d-flex justify-content-between align-items-center">
         <h2 class="fw-bold mb-4 text-dark pb-2"> 📦Data Produk</h2>
-        {{-- <button type="button" class="btn btn-custom-dark me-2" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah <i class="fas fa-plus"></i></button> --}}
+        <button type="button" class="btn btn-custom-dark me-2" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah <i class="fas fa-plus"></i></button>
     </div>
     <hr>
     <table id="myTable" class="table table-striped table-bordered align-middle shadow-sm rounded-3 bg-white">
@@ -107,7 +103,7 @@
         {{-- Modal Hapus Produk --}}
         <div class="modal fade" id="hapusModal{{ $item->id }}">
             <div class="modal-dialog">
-                <form action="{{ route('hapus-produk', $item->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('hapus-prod', $item->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
                     <div class="modal-content">
@@ -130,7 +126,7 @@
 </div>
 
 {{-- Modal Tambah Produk --}}
-{{-- <div class="modal fade" id="tambahModal">
+<div class="modal fade" id="tambahModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="{{ route('store-produk') }}" method="post" enctype="multipart/form-data">
@@ -158,7 +154,7 @@
                         <input type="date" class="form-control" id="tanggal_upload" placeholder="Masukkan Tanggal Upload" required>
                         <label for="tanggal_upload"> Tanggal Upload</label>
                     </div> --}}
-                        {{-- <select name="id_kategori" class="form-control mb-2" placeholder="Pilih Kategori" required>
+                        <select name="id_kategori" class="form-control mb-2" placeholder="Pilih Kategori" required>
                             <option value="">-- Pilih Kategori --</option>
                              @foreach($kategori as $jenis)
                                 <option value="{{ $jenis->id }}">{{ $jenis->nama_kategori }}</option>
@@ -178,6 +174,6 @@
             </form>
         </div>
     </div>
-</div> --}}
+</div>
 
 @endsection

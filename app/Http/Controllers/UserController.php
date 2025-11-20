@@ -11,36 +11,18 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function admin(){
-        $data['user'] = User::all();
-        $data['totaluser'] = User::count();
-        $data['totaltoko'] = Toko::count();
-        $data['totalproduk'] = Produk::count();
-        $data['totalkate'] = Kategori::count();
-        $data['totalstock'] = Produk::where('stock','>',0)->count();
-        return view('admin.admin',$data);
-    }
-    public function member(){
-        $data['user'] = User::all();
-        $data['totaluser'] = User::count();
-        $data['totaltoko'] = Toko::count();
-        $data['totalproduk'] = Produk::count();
-        $data['totalkate'] = Kategori::count();
-        $data['totalstock'] = Produk::where('stock','>',0)->count();
-        return view('member.member',$data);
-    }
+    //Tampilan Beranda
     public function beranda(){
         $data['kategori'] = Kategori::all();
         $data['produk'] = Produk::all();
-        return view('beranda',$data);
+        return view('clients.beranda',$data);
     }
-    public function regis(){
-        return view('register');
-    }
+    //Tampilkan User
     public function index(){
         $data['user'] = User::all();
         return view('admin.user',$data);
     }
+    //Tambah User
     public function store(Request $request){
         $request->validate([
             'nama'=>'required',
@@ -57,6 +39,7 @@ class UserController extends Controller
         ]);
         return redirect()->route('user')->with('success','User Berhasil Ditambahkan');
     }
+    //Edit User
     public function update(Request $request, $id){
         $request->validate([
             'nama'=>'required',
@@ -79,6 +62,8 @@ class UserController extends Controller
         $user->delete();
         return redirect()->back()->with('success','User Berhasil Dihapus');
     }
+
+    //Login dan Logout
     public function login(){
         return view('login');
     }
@@ -92,7 +77,7 @@ class UserController extends Controller
                 return redirect()->route('user')->with('success','Selamat Datang Admin');
             }
             if (Auth::user()->role == 'Member') {
-                return redirect()->route('member')->with('success','Selamat Datang Member');
+                return redirect()->route('beranda')->with('success','Selamat Datang Member');
             }
         }
         return back()->with('error','Username atau Password salah');
@@ -103,4 +88,24 @@ class UserController extends Controller
         return redirect()->route('login')->with('success','Logout Berhasil');
     }
 
+    //Tampilan Register
+    public function regis(){
+        return view('register');
+    }
+    public function register(Request $request){
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kontak' => 'required|string|max:15',
+            'username' => 'required|string|max:255|unique:users',
+            'password' => 'required|string',
+        ]);
+        User::create([
+            'nama' => $request->nama,
+            'kontak' => $request->kontak,
+            'username' => $request->username,
+            'role' => 'Member',
+            'password' => bcrypt($request->password),
+        ]);
+        return redirect()->route('login')->with('succsess','registrasi berhasil,silahkan login');
+    }
 }
