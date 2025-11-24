@@ -164,7 +164,7 @@
                     <h4 class="card-title fw-bold">Hotwheels</h4>
                     <p class="card-text text-muted">Mobil Hotwheels</p>
                     {{-- <label for="" class="bg bg-success p-1 text-white rounded">Rp{{ number_format($produk->harga,0,",",".") }}</label> --}}
-                    <a href="" class="btn btn-primary w-100 rounded-3 btn-buy">Beli</a>
+                    <a href="https://wa.me/6282315818637?text=Halo%20saya%20ingin%20bertanya" class="btn btn-primary w-100 rounded-3 btn-buy"><i class="fa-brands fa-whatsapp"></i> Pesan Via Whattsapp</a>
                 </div>
             </div>
         </div>
