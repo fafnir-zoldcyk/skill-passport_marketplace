@@ -31,34 +31,42 @@ class MemberController extends Controller
     // public function addtoko(){
     //     return view('member.member-create');
     // }
-    public function addtoko(Request $request){
-
-        // dd($request->all());
-        $request->validate([
-            'nama_toko' => 'required|string|max:45',
-            'deskripsi' => 'required|string',
-            'gambar' => 'required|image|mimes:jgp,jeg,png,gif|max:2048',
-            'alamat' => 'required|string'
-        ]);
-
-        if ($request->hasFile('gambar')) {
-            $foto = $request->file('gambar');
-            $gambar = time(). '_'.$request->nama_toko . '_' .$foto->getClientOriginalName();
-            $foto->storeAs('gambar',$gambar,'public');
-        }else{
-            $gambar = null;
+    public function addtoko(Request $request)
+    {
+        // Cek apakah user sudah memiliki toko
+        if (Auth::user()->toko) {
+            return redirect()->back()->with('error', 'Anda sudah memiliki toko.');
         }
 
-        Toko::create([
-            'users_id' => Auth::id(),
-            'nama_toko' => $request->nama_toko,
-            'kontak_toko' => Auth::user()->kontak,
-            'alamat' => $request->alamat,
-            'status' => 'Pending',
-            'deskripsi' => $request->deskripsi,
-            'gambar' => $gambar,
+        $request->validate([
+            'nama_toko' => 'required|string|max:100|unique:tokos,nama_toko',
+            'deskripsi' => 'required|string|max:500',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'kontak_toko' => 'nullable|string|max:13',
+            'alamat' => 'required|string|max:255',
         ]);
-        return redirect()->route('member')->with('success','Toko Berhasil Di Buat');
+
+        // Handle upload gambar
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file('gambar');
+            $filename = time() . '-' . $request->nama_toko . '.' . $gambar->getClientOriginalExtension();
+            $gambar->storeAs('image', $filename, 'public'); // Simpan di storage/app/public/image
+        } else {
+            return redirect()->back()->with('error', 'Gambar toko wajib diupload.')->withInput();
+        }
+
+        // Buat toko
+        Toko::create([
+            'nama_toko' => $request->nama_toko,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $filename,
+            'status' => 'pending', // Default status pending untuk verifikasi
+            'kontak_toko' => $request->kontak_toko,
+            'alamat' => $request->alamat,
+            'users_id' => Auth::user()->id, // Gunakan ID user yang login
+        ]);
+
+        return redirect()->route('member')->with('success', 'Toko berhasil dibuat! Menunggu verifikasi admin.');
     }
     public function edit(Request $request){
         $request->validate([

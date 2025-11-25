@@ -38,7 +38,7 @@
                     <td>{{$item->deskripsi}}</td>
                     <td>
                         @if($item->gambar)
-                            <img src="{{ asset('storage/gambar/'. $item->gambar) }}" alt="Gambar Toko" style="width: 100px; height: auto;">
+                            <img src="{{ asset('storage/image/'. $item->gambar) }}" alt="Gambar Toko" style="width: 100px; height: auto;">
                         @else
                             Tidak ada gambar
                         @endif
@@ -49,9 +49,9 @@
                     <td>
                         <button type="button" class="btn btn-custom-dark me-2" data-bs-toggle="modal" data-bs-target="#editModal{{$item->id}}"><i class="fa-solid fa-pen-to-square "></i></button>
                         <button type="button" class="btn btn-custom-dark me-2" data-bs-toggle="modal" data-bs-target="#hapusModal{{$item->id}}"><i class="fa-solid fa-trash-can "></i></button>
-                        <form action="{{ route('approve-toko',$item->id) }}" method="post" class="d-inline">
+                        <form action="{{ route('approve-toko',$item->id) }}" method="post" class="d-inline" >
                             @csrf
-                            <button type="submit" class="btn btn-custom-dark">Approve</button>
+                            <button type="submit" class="btn btn-custom-dark" onclick="return confirm('Apakah anda Yakin akan melakuka approve untuk toko ini?')">Approve</button>
                         </form>
                     </td>
                 </tr>

@@ -24,7 +24,7 @@
     }
     .store-profile .cover{
         height: 12px;
-        background: linear-gradient(90deg, rgba(44,62,80,0.95), rgba(52,7394,0.95));
+        background: linear-gradient(90deg, rgba(44,62,80,0.95), rgba(52,73,94,0.95));
     }
     .store-profile .avatar{
         margin-top: -50px;
@@ -40,17 +40,34 @@
     }
 </style>
 <div class="main-content">
+    {{-- Tampilkan pesan sukses --}}
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     @endif
+
+    {{-- Tampilkan pesan error --}}
+    @if($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     @php
-        $toko = Auth::user()->Toko;
-        $jumlahProduk = $toko ? $toko->Produk->count() : 0;
-        $jumlahGambar = $toko ? \App\Models\Gambar::whereIn('produk_id', $toko->Produk->pluck('id'))->count() : 0;
+        $toko = Auth::user()->toko; // perhatikan huruf kecil 'toko'
+        $jumlahProduk = $toko ? $toko->produk->count() : 0;
+        $jumlahGambar = $toko ? \App\Models\Gambar::whereIn('produk_id', $toko->produk->pluck('id'))->count() : 0;
     @endphp
 
-            <h1 class="mb-4">Dashboard Toko Online</h1>
-            <p>Selamat datang di area admin toko online Anda. Kelola produk, dan toko anda disini.</p>
+    <h1 class="mb-4">Dashboard Toko Online</h1>
+    <p>Selamat datang di area admin toko online Anda. Kelola produk, dan toko anda disini.</p>
 
     {{-- Jika belum punya toko --}}
     @if (!$toko)
@@ -63,14 +80,13 @@
                 <h4 class="fw-bold">Belum Ada Toko</h4>
                 <p class="lead opacity-85">Klik tombol di bawah ini untuk membuat toko Anda dan mulai menjual produk.</p>
 
-                <button  type="submit" class="btn btn-light fw-bold px-4" data-bs-toggle="modal" data-bs-target="#tambahToko">
+                <button type="button" class="btn btn-light fw-bold px-4" data-bs-toggle="modal" data-bs-target="#tambahToko">
                     <i class="fas fa-plus me-2"></i> Buat Toko
                 </button>
             </div>
         </div>
 
-    @elseif ($toko && $toko->status == 'pending')
-
+    @elseif ($toko && $toko->status == 'Pending')
         <div class="alert alert-info mt-3" role="alert">
             <strong>Info:</strong> Toko Anda sedang dalam proses verifikasi.
         </div>
@@ -137,40 +153,65 @@
         </div>
     @endif
 
-    {{-- Tambah Toko --}}
-        <div class="modal fade" id="tambahToko">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form action="{{ route('add-toko') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-header">
-                            <h5 class="modal-title">Buat Toko</h5>
+    {{-- Modal Tambah Toko --}}
+    <div class="modal fade" id="tambahToko" tabindex="-1" aria-labelledby="tambahTokoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('add-toko') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahTokoLabel">Buat Toko</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control @error('nama_toko') is-invalid @enderror"
+                                   name="nama_toko" placeholder="Nama Toko" value="{{ old('nama_toko') }}" required>
+                            <label for="nama_toko">Nama Toko</label>
+                            @error('nama_toko')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="modal-body">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="nama_toko" placeholder="Nama Toko" required>
-                                <label for="nama_toko">Nama Toko</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control"name="deskripsi" placeholder="Deskripsi" required>
-                                <label for="deskripsi">Deskripsi</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <textarea type="text" class="form-control" name="alamat" placeholder="Alamat" required></textarea>
-                                <label for="Alamat">Alamat</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="file" class="form-control" name="gambar" placeholder="Gambar" required>
-                                <label for="gambar">Gambar</label>
-                            </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control @error('deskripsi') is-invalid @enderror"
+                                   name="deskripsi" placeholder="Deskripsi" value="{{ old('deskripsi') }}" required>
+                            <label for="deskripsi">Deskripsi</label>
+                            @error('deskripsi')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-custom-dark">Buat Toko</button>
-                            <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Batal</button>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control @error('alamat') is-invalid @enderror"
+                                      name="alamat" placeholder="Alamat" style="height: 100px" required>{{ old('alamat') }}</textarea>
+                            <label for="alamat">Alamat</label>
+                            @error('alamat')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                    </form>
-                </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control @error('kontak_toko') is-invalid @enderror"
+                                      name="kontak_toko" placeholder="Kontak Toko"  required>{{ old('kontak_toko') }}</input>
+                            <label for="kontak_toko">Kontak Toko</label>
+                            @error('kontak_toko')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="gambar" class="form-label">Gambar Toko</label>
+                            <input type="file" class="form-control @error('gambar') is-invalid @enderror"
+                                   name="gambar" accept="image/*" required>
+                            @error('gambar')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-custom-dark">Buat Toko</button>
+                        <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 </div>
 @endsection

@@ -65,7 +65,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('str',[TokoController::class,'store'])->name('store-toko');
     Route::put('/uptoko/{id}',[TokoController::class,'update'])->name('update-toko');
     Route::delete('/toko/{id}',[TokoController::class,'destroy'])->name('hapus-toko');
-    Route::get('/approve/{id}',[TokoController::class,'approve'])->name('approve-toko');
+    Route::post('/approve/{id}',[TokoController::class,'approve'])->name('approve-toko');
 
 
 
