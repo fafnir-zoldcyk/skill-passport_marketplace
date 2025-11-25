@@ -106,6 +106,6 @@ class UserController extends Controller
             'role' => 'Member',
             'password' => bcrypt($request->password),
         ]);
-        return redirect()->route('login')->with('succsess','registrasi berhasil,silahkan login');
+        return redirect()->route('login')->with('success','Registrasi berhasil,silahkan login');
     }
 }

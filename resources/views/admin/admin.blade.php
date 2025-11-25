@@ -2,7 +2,7 @@
 
 @section('sidebar')
 <div class="main-content">
-    <h2 class="fw-bold mb-4 text-dark border-bottom pb-2">Dashboard Ujang Ujang Ujang</h2>
+    <h2 class="fw-bold mb-4 text-dark border-bottom pb-2">Dashboard</h2>
     <div class="row mb-3 g-3 justify-content-center align-items-center">
         <div class="col-md-3">
             <div class="card text-white btn-custom-dark p-3">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <div class="card text-white btn-custom-dark p-3">
                 <div class="d-flex align-items-center">
                     <i class="fa-solid fa-tags fa-2x me-3"></i>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection

@@ -49,6 +49,8 @@
         $jumlahGambar = $toko ? \App\Models\Gambar::whereIn('produk_id', $toko->Produk->pluck('id'))->count() : 0;
     @endphp
 
+            <h1 class="mb-4">Dashboard Toko Online</h1>
+            <p>Selamat datang di area admin toko online Anda. Kelola produk, dan toko anda disini.</p>
 
     {{-- Jika belum punya toko --}}
     @if (!$toko)
@@ -61,9 +63,9 @@
                 <h4 class="fw-bold">Belum Ada Toko</h4>
                 <p class="lead opacity-85">Klik tombol di bawah ini untuk membuat toko Anda dan mulai menjual produk.</p>
 
-                <a href="" class="btn btn-light fw-bold px-4">
+                <button  type="submit" class="btn btn-light fw-bold px-4" data-bs-toggle="modal" data-bs-target="#tambahToko">
                     <i class="fas fa-plus me-2"></i> Buat Toko
-                </a>
+                </button>
             </div>
         </div>
 
@@ -78,9 +80,7 @@
         <div class="container mt-4">
             <div class="card store-profile shadow-sm">
                 <div class="cover d-flex align-items-end px-4">
-                    <!-- kosong: bisa diganti background image jika ingin -->
                 </div>
-
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-2 text-center">
@@ -100,17 +100,15 @@
                             <p class="mb-1 text-muted">{{ $toko->deskripsi ?? 'Deskripsi singkat toko...' }}</p>
                             <span class="badge bg-success">{{ ucfirst($toko->status) }}</span>
                         </div>
-
-                        {{-- <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                            <a href="{{ route('toko.edit', $toko->id) }}" class="btn btn-outline-primary me-2">
+                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                            <a href="{{ route('edit-toko', $toko->id) }}" class="btn btn-outline-primary me-2">
                                 <i class="fas fa-edit me-1"></i> Edit Toko
                             </a>
-                            <a href="{{ route('produk.index') }}" class="btn btn-primary">
+                            <a href="{{ route('produk-view') }}" class="btn btn-primary">
                                 <i class="fas fa-boxes me-1"></i> Kelola Produk
                             </a>
                         </div>
-                    </div> --}}
-
+                    </div>
                     <hr class="my-3">
 
                     <div class="d-flex store-stats align-items-center justify-content-between flex-wrap">
@@ -130,7 +128,7 @@
                         </div>
 
                         <div class="stat text-center">
-                            <div class="h5 mb-0 fw-bold">{{ $toko->lokasi ?? '-' }}</div>
+                            <div class="h5 mb-0 fw-bold">{{ $toko->alamat ?? '-' }}</div>
                             <small class="text-muted">Lokasi</small>
                         </div>
                     </div>
@@ -139,5 +137,40 @@
         </div>
     @endif
 
+    {{-- Tambah Toko --}}
+        <div class="modal fade" id="tambahToko">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{ route('add-toko') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title">Buat Toko</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="nama_toko" placeholder="Nama Toko" required>
+                                <label for="nama_toko">Nama Toko</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control"name="deskripsi" placeholder="Deskripsi" required>
+                                <label for="deskripsi">Deskripsi</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea type="text" class="form-control" name="alamat" placeholder="Alamat" required></textarea>
+                                <label for="Alamat">Alamat</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="file" class="form-control" name="gambar" placeholder="Gambar" required>
+                                <label for="gambar">Gambar</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-custom-dark">Buat Toko</button>
+                            <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 </div>
 @endsection

@@ -28,7 +28,12 @@ class MemberController extends Controller
         $data['toko'] = Toko::all();
         return view('member.produk',$data);
     }
+    // public function addtoko(){
+    //     return view('member.member-create');
+    // }
     public function addtoko(Request $request){
+
+        // dd($request->all());
         $request->validate([
             'nama_toko' => 'required|string|max:45',
             'deskripsi' => 'required|string',
@@ -36,12 +41,12 @@ class MemberController extends Controller
             'alamat' => 'required|string'
         ]);
 
-        $gambar = null;
-
         if ($request->hasFile('gambar')) {
             $foto = $request->file('gambar');
-            $gambar = time(). '_'.$foto->getClientOriginalName();
-            $foto->move(public_path('storage/gambartoko'),$gambar);
+            $gambar = time(). '_'.$request->nama_toko . '_' .$foto->getClientOriginalName();
+            $foto->storeAs('gambar',$gambar,'public');
+        }else{
+            $gambar = null;
         }
 
         Toko::create([
@@ -49,22 +54,21 @@ class MemberController extends Controller
             'nama_toko' => $request->nama_toko,
             'kontak_toko' => Auth::user()->kontak,
             'alamat' => $request->alamat,
-            'status' => 'pending',
+            'status' => 'Pending',
             'deskripsi' => $request->deskripsi,
             'gambar' => $gambar,
         ]);
-        return redirect()->back()->with('success','Toko Berhasil Di Buat');
+        return redirect()->route('member')->with('success','Toko Berhasil Di Buat');
     }
     public function edit(Request $request){
         $request->validate([
             'nama_toko' => 'required|string|max:45',
             'deskripsi' => 'required|string',
-            'gambar' => 'required|image|mimes:jgp,jeg,png,gif|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,gif|max:2048',
         ]);
         $toko = Toko::firstOrFail($request->id);
         $filename = $toko->gambar;
 
-        $gambar = null;
 
         if ($request->hasFile('logo_toko')) {
             if ($toko->gambar && file_exists(public_path('storage/logotoko/'.$toko->gambar))) {

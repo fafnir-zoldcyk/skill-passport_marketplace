@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - FStore</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('bootstrap-5.3.8-dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
 
     <style>
@@ -40,7 +40,7 @@
             color: white;
         }
 
-        /* ICON KEMBALI DI POJOK KIRI ATAS LAYAR */
+        /* Tombol Kembali di Kiri Ujung Layar */
         .back-icon {
             position: fixed;
             top: 20px;
@@ -59,14 +59,16 @@
 </head>
 <body>
 
-    <!-- ICON BACK DI LUAR CARD -->
+    <!-- Tombol Kembali-->
     <a href="/" class="back-icon">
         <i class="fas fa-arrow-left"></i>
     </a>
 
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="login-container">
-
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
             <div class="brand-title">FStore</div>
 
             <form action="{{ route('login.auth') }}" method="post">
@@ -80,18 +82,16 @@
                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
                     <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                 </div>
+                <div class="d-grid gap-2 mt-4 mb-3">
+                    <button type="submit" class="btn btn-custom-primary text-white">Login</button>
+                </div>
                 <div class="d-flex justify-content-center text-center">
                     <label for="">No Have Account? <a style="text-decoration:none" href="/regis">Register</a></label>
                 </div>
-                <div class="d-grid gap-2 mt-4">
-                    <button type="submit" class="btn btn-custom-primary text-white">Login</button>
-                </div>
             </form>
-
-            <p class="text-center mt-3 text-muted">
+            <p class="text-center mt-4 mb-0 text-muted">
                 &copy; {{ date('Y') }} FStore. All rights reserved.
             </p>
-
         </div>
     </div>
 

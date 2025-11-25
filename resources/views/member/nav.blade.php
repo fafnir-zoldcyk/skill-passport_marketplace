@@ -11,9 +11,9 @@
 
 <!-- jQuery dan DataTables -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
+<script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+<script src="{https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js}"></script>
 
 {{-- Modal --}}
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -138,8 +138,6 @@
             {{-- <li><a href="/use"><i class="fa-solid fa-user"></i>Profile</a></li> --}}
             <li><a href="/tok"><i class="fa-solid fa-shop"></i>Toko</a></li>
             <li><a href="/prod"><i class="fa-solid fa-box"></i>Produk</a></li>
-            {{-- <li><a href="/kate"><i class="fa-solid fa-list"></i>Kategori</a></li> --}}
-            {{-- <li><a href="/gambar"><i class="fa-solid fa-image"></i>Gambar</a></li> --}}
             <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
         </ul>
     </div>
@@ -158,6 +156,7 @@
 <script>
 $(document).ready(function() {
     $('#myTable').DataTable({
+        info: false,
         responsive: true,    // tabel responsive di HP
         pageLength: 5,       // jumlah baris per halaman
         language: {

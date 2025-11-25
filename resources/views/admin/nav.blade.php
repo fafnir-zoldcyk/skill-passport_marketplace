@@ -164,12 +164,12 @@
     <script>
     $(document).ready(function() {
         $('#myTable').DataTable({
+            paging: true,        //halaman
+            info: false,
             responsive: true,    // tabel responsive di HP
             pageLength: 5,       // jumlah baris per halaman
             language: {
                 search: "Cari:",
-                lengthMenu: "Tampilkan _MENU_ baris",
-                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data"
             },
             // aktifkan tema boostrap
             dom: 'frtip'

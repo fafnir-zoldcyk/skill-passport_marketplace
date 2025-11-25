@@ -66,9 +66,6 @@
 
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="login-container">
-            @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
             <div class="brand-title">FStore</div>
 
             <form action="{{ route('regiter-store') }}" method="post">

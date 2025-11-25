@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_toko');
             $table->text('deskripsi');
             $table->string('gambar');
-            $table->enum('status',['Rejected','Active','Pending'])->default('pending');
+            $table->enum('status',['Rejected','Active','Pending'])->default('Pending');
             $table->foreignId('users_id')->references('id')->on('users');
             $table->string('kontak_toko');
             $table->text('alamat');
