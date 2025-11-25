@@ -68,29 +68,29 @@ class MemberController extends Controller
 
         return redirect()->route('member')->with('success', 'Toko berhasil dibuat! Menunggu verifikasi admin.');
     }
-    public function edit(Request $request){
+    public function edit(Request $request,$id){
         $request->validate([
             'nama_toko' => 'required|string|max:45',
-            'deskripsi' => 'required|string',
+            'deskripsi' => 'required|string|max:13',
+            'kontak_toko' => 'required|string',
             'gambar' => 'required|image|mimes:jpeg,png,gif|max:2048',
         ]);
-        $toko = Toko::firstOrFail($request->id);
+        $toko = Toko::firstOrFail($id);
         $filename = $toko->gambar;
 
 
-        if ($request->hasFile('logo_toko')) {
-            if ($toko->gambar && file_exists(public_path('storage/logotoko/'.$toko->gambar))) {
-                unlink(public_path('storage/logotoko/'.$toko->gambar));
-            }
-
-            $file = $request->file('logo_toko');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('storage/logotoko'), $fileName);
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file('gambar');
+            $filename = time() . '-' . $request->nama_toko . '.' . $gambar->getClientOriginalExtension();
+            $gambar->storeAs('image', $filename, 'public'); // Simpan di storage/app/public/image
+        } else {
+            return redirect()->back()->with('error', 'Gambar toko wajib diupload.')->withInput();
         }
         $toko->update([
             'nama_toko' => $request->nama_toko,
             'deskripsi' => $request->deskripsi,
-            'gambar' => $filename
+            'gambar' => $filename,
+            'kontak_toko' => $request->kontak_toko
         ]);
         return redirect()->back()->with('success','Toko Berhasil di ubah');
     }

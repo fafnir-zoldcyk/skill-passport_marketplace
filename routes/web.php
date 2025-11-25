@@ -37,7 +37,7 @@ Route::middleware(['member'])->group(function () {
     Route::get('/member',[MemberController::class,'member'])->name('member');
     //Toko
     Route::post('/member',[MemberController::class,'addtoko'])->name('add-toko');
-    Route::put('/upmem/{id}',[MemberController::class,'edit'])->name('edit-toko');
+    Route::put('/upmem',[MemberController::class,'edit'])->name('edit-toko');
     //Produk
     Route::get('/prod',[MemberController::class,'tampilan'])->name('member-produk');
     Route::post('/stopro',[ProdukController::class,'store'])->name('store-produk');

@@ -117,9 +117,9 @@
                             <span class="badge bg-success">{{ ucfirst($toko->status) }}</span>
                         </div>
                         <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                            <a href="{{ route('edit-toko', $toko->id) }}" class="btn btn-outline-primary me-2">
+                            <button  data-bs-toggle="modal" data-bs-target="#editToko" class="btn btn-custom-dark me-2">
                                 <i class="fas fa-edit me-1"></i> Edit Toko
-                            </a>
+                            </button>
                             <a href="{{ route('produk-view') }}" class="btn btn-primary">
                                 <i class="fas fa-boxes me-1"></i> Kelola Produk
                             </a>
@@ -214,4 +214,48 @@
         </div>
     </div>
 </div>
+{{-- Edit Toko --}}
+@if ($toko)
+    
+<div class="modal fade" id="editToko" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <form action="{{ route('edit-toko') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="modal-header">
+                <h4>Edit Toko</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <input type="text" name="nama_toko" class="form-control" placeholder="Nama Toko" value="{{ $toko->nama_toko }}" required>
+                    <label for="Nama">Nama Toko</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" name="deskripsi" class="form-control" placeholder="Deskripsi" value="{{ $toko->deskripsi }}" required>
+                    <label for="Nama">Deskripsi</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <div class="form-floating mb-3">
+                        <input type="number" name="kontak_toko" class="form-control" placeholder="Kontak" value="{{ $toko->kontak_toko }}" required>
+                        <label for="Nama">Kontak Toko</label>
+                    </div>
+                </div>
+                    <textarea type="text" name="alamat" class="form-control" placeholder="Alamat" value="{{ $toko->alamat }}" required></textarea>
+                    <label for="Alamat">Alamat</label>
+                <div class="form-floating mb-3">
+                    <input type="file" name="gambar" class="form-control" placeholder="Nama Toko" value="{{ $toko->gambar }}" required>
+                    <label for="Gambar">Gambar</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-custom-dark">Simpan</button>
+                <button type="button" class="btn btn-custom-dark" data-bs-dismiss="modal">Batal</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+@endif
 @endsection

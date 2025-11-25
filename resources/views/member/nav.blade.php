@@ -135,8 +135,8 @@
         {{-- list --}}
         <ul>
             <li><a href="/member"><i class="fa-solid fa-house"></i>Beranda</a></li>
-            {{-- <li><a href="/use"><i class="fa-solid fa-user"></i>Profile</a></li> --}}
-            <li><a href="/tok"><i class="fa-solid fa-shop"></i>Toko</a></li>
+            <li><a href="/use"><i class="fa-solid fa-user"></i>Profile</a></li>
+            {{-- <li><a href="/tok"><i class="fa-solid fa-shop"></i>Toko</a></li> --}}
             <li><a href="/prod"><i class="fa-solid fa-box"></i>Produk</a></li>
             <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
         </ul>
